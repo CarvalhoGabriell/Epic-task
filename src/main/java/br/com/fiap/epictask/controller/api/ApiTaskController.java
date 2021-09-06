@@ -3,6 +3,8 @@ package br.com.fiap.epictask.controller.api;
 import java.net.URI;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -80,15 +82,22 @@ public class ApiTaskController {
 	
 	// update
 	@PutMapping("{id}")
-	public ResponseEntity<Task> update(@PathVariable Long id, Task task) {
+	public ResponseEntity<Task> update(@PathVariable Long id, @RequestBody @Valid Task newTask) {
 		
+		// buscar uma task no banco de dados
 		Optional<Task> findTask = repo.findById(id);
 		System.out.println(findTask);
+		
+		// verificar se ele existe
 		if (findTask.isPresent()) {
 			
+			Task task = findTask.get();
+			task.setDescription(newTask.getDescription());
+			task.setPoints(newTask.getPoints());
+			task.setTitle(newTask.getTitle());
 			repo.save(task);
 			
-			return ResponseEntity.ok().build();
+			return ResponseEntity.ok(task);
 	
 		}
 		
