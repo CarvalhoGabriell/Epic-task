@@ -6,6 +6,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -34,6 +36,7 @@ public class ApiTaskController {
 	private TaskRepository repo;
 	
 	@GetMapping
+	@Cacheable("tasks")
 	public Page<Task> index(@RequestParam(required = false) String title, @PageableDefault(size = 5) Pageable pageable) {
 		if (title == null) {
 			
@@ -68,6 +71,7 @@ public class ApiTaskController {
 	}
 	
 	@DeleteMapping("{id}")
+	@CacheEvict(value = "tasks", allEntries = true)
 	public ResponseEntity<Task> delete(@PathVariable Long id) {
 		Optional<Task> task = repo.findById(id);
 		
@@ -82,6 +86,7 @@ public class ApiTaskController {
 	
 	// update
 	@PutMapping("{id}")
+	@CacheEvict(value = "tasks", allEntries = true)
 	public ResponseEntity<Task> update(@PathVariable Long id, @RequestBody @Valid Task newTask) {
 		
 		// buscar uma task no banco de dados
