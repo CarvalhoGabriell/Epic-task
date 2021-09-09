@@ -55,7 +55,6 @@ public class ApiTaskController {
 	public ResponseEntity<Task> create(@RequestBody Task task, UriComponentsBuilder uriBuilder) {
 		
 		repo.save(task);
-		System.out.println(task);
 		
 		URI uri = uriBuilder
 				.path("/api/tasks/{id}")

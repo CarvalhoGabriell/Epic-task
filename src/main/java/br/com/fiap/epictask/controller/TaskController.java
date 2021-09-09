@@ -30,6 +30,7 @@ public class TaskController {
 		return modelAndView;
 	}
 	
+	
 	@RequestMapping("/tasks/new")
 	public String create(Task task) {
 		
@@ -45,7 +46,6 @@ public class TaskController {
 			return "task-form";
 		}
 		repo.save(task);
-		System.out.println("Salvando tarefa..."+task);
 		return "tasks";
 	}
 	
