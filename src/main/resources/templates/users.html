@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Listando Usuario</title>
+</head>
+<body>
+	
+	<h1>EPIC TASKS</h1>
+	
+	<h2> Lista de Usuarios Cadastrados</h2>
+	
+	<ul th:each="user : ${users}">
+		<li >
+			<label>Usuario ID: </label>
+			<p th:text="${user.id}"></p>
+			<label>Email: </label>
+			<p th:text="${user.email}"></p>
+			<label>Nome Completo: </label>
+			<p th:text="${user.nome}"></p>
+			<label>Senha: </label>
+			<p th:text="${user.password}"></p>
+		</li>
+	</ul>
+</body>
+</html>
