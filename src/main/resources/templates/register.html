@@ -8,7 +8,7 @@
 	
 	<h1>Criar Usuario</h1>
 	
-  	<form action="/users" method="post" th:object="${usuario}">
+  	<form action="/users" method="post" th:object="${usuario}" >
 		
 		<label for="nome">Nome Completo: </label>
 		<input name="nome" id="nome" type="text" th:field="*{nome}">

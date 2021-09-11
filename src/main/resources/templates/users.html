@@ -11,7 +11,7 @@
 	<h2> Lista de Usuarios Cadastrados</h2>
 	
 	<ul th:each="user : ${users}">
-		<li >
+		<li style="border-style: solid; border-radius: 10px; padding: 30px">
 			<label>Usuario ID: </label>
 			<p th:text="${user.id}"></p>
 			<label>Email: </label>
