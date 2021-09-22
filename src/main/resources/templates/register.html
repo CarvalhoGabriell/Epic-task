@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html  xmlns:th="https://thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>New User</title>
+<head th:include="_template :: head">
+
 </head>
 <body>
 	
-	<h1>Criar Usuario</h1>
+	<h1 th:text="#{title.newUser}"></h1>
 	
   	<form action="/users" method="post" th:object="${usuario}" >
 		
-		<label for="nome">Nome Completo: </label>
+		<label for="nome" th:text="#{title.user.name}"></label>
 		<input name="nome" id="nome" type="text" th:field="*{nome}">
 		<span th:errors="*{nome}"></span>
 		
@@ -18,11 +17,11 @@
 		<input id= "email" name="email" type="email" th:field="*{email}">
 		<span  th:errors="*{email}"></span>
 		
-		<label for="password">Senha: </label>
+		<label for="password" th:text="#{title.user.password}"></label>
 		<input name="password" id="password" type="password" th:field="*{password}">
 		<span th:errors="*{password}"></span>
 		
-		<button>Registrar</button>
+		<button th:text="#{button.Create}"></button>
 	</form>
  
 

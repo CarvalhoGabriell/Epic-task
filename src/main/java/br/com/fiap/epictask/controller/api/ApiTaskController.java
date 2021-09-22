@@ -26,10 +26,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.fiap.epictask.model.Task;
 import br.com.fiap.epictask.repository.TaskRepository;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/tasks")
 @ResponseBody
+@Slf4j
+
 public class ApiTaskController {
 	
 	@Autowired
@@ -90,8 +93,7 @@ public class ApiTaskController {
 		
 		// buscar uma task no banco de dados
 		Optional<Task> findTask = repo.findById(id);
-		System.out.println(findTask);
-		
+		log.info("Objeto encontrado :"+findTask.get());		
 		// verificar se ele existe
 		if (findTask.isPresent()) {
 			

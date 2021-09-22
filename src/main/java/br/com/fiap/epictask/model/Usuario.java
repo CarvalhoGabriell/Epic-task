@@ -17,14 +17,14 @@ public class Usuario {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message = "Preencha com email válido")
+	@NotNull(message = "{user.title.email}")
 	private String email;
 	
-	@NotBlank(message = "Nome deve ser Obrigatório")
-	@Size(min = 5, message = "Mínimo deve ser 5 caracteres")
-	@Size(max = 50, message = "Máximo deve ser 50 caracteres")
+	@NotBlank(message = "{user.title.name}")
+	@Size(min = 5, message = "{user.name.size.min}")
+	@Size(max = 50, message = "{user.name.size.max}")
 	private String nome;
 	
-	@Size(min = 8, message = "Senha deve conter no minimo 8 caracteres")
+	@Size(min = 8, message = "{user.title.password}")
 	private String password;
 }

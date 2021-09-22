@@ -1,31 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="https://thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>New Task</title>
+<head th:include="_template :: head">
+
 </head>
 <body>
 	
 	<h1>Epic Tasks</h1>
 	
-	<h2>Nova Tarefa</h2>
+	<div class="card">
+		
+		<h2 th:text="#{button.newwTask}"></h2>
+		
+		<form class="form-vertical" action="/tasks" method="post" th:object="${task}">
+		
+			<label class="hide" for="title" th:text="#{task.title}"></label>
+			<input type="text" id= "title" name="title" th:field="*{title}">
+			<span th:errors="*{title}"></span>
+			
+			<label class="hide" for="description"  th:text="#{task.description}"></label>
+			<textarea name="description" id="description" th:field="*{description}" rows="" cols=""></textarea>
+			<span th:errors="*{description}"></span>
+			
+			<label th:text="#{task.points}" for="points"></label>
+			<input 
+			id="points" 
+			name="points" 
+			type="range" 
+			th:field="*{points}"
+			min=10
+			max=500
+			step="5"
+			oninput="document.querySelector('#output-points').value = this.value"
+			>
+			<output id="output-points"></output>
+			<span th:errors="*{points}"></span>
+			
+			<div class="action-button">
+				<a class="button" href="/tasks" th:text="#{button.cancel}"></a>
+				<button class="primary" th:text="#{button.save}"></button>
+			</div>
+		</form>
 	
-	<form action="/tasks" method="post" th:object="${task}">
-	
-		<label for="title">Titulo</label>
-		<input id= "title" name="title" th:field="*{title}">
-		<span th:errors="*{title}"></span>
-		
-		<label for="description">Descrição</label>
-		<textarea name="description" id="description" th:field="*{description}" rows="" cols=""></textarea>
-		<span th:errors="*{description}"></span>
-		
-		<label for="points">Pontos</label>
-		<input id="points" name="points" type="range" th:field="*{points}">
-		<span th:errors="*{points}"></span>
-		
-		<a href="/tasks">Cancelar</a>
-		<button>Salvar</button>
-	</form>
+	</div>
 </body>
 </html>
